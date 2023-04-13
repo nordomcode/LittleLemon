@@ -16,10 +16,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from Restaraunt.views import BookingViewSet
+from rest_framework import routers
 
+router = routers.DefaultRouter()
+
+router.register(r'tables', BookingViewSet, basename='booking')
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('restaurant/', include('Restaraunt.urls')),
+    path('restaurant/booking/', include(router.urls)),
+    path('auth/', include('djoser.urls')),
+    path('auth/', include('djoser.urls.authtoken')),
 ]
